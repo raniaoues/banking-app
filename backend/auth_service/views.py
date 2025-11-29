@@ -75,3 +75,6 @@ def sign_in(request):
             "email": user.email
         }
     })
+@ensure_csrf_cookie
+def csrf(request):
+    return JsonResponse({"detail": "CSRF cookie set"})
