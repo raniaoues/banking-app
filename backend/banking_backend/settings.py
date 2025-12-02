@@ -39,12 +39,17 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.contenttypes',  # ⚠️ obligatoire
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # tes apps
+    'auth_service',
+    'account_service',
+    'transfer_service',
+    'shared',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,12 +85,15 @@ WSGI_APPLICATION = 'banking_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bankingdb',
-        'USER': 'postgres',
-        'PASSWORD': 'yourpassword',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'banking_db',
+        'USER': 'root',
+        'PASSWORD': 'rania123',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -131,11 +139,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-INSTALLED_APPS = [
-    'rest_framework',
-    'corsheaders',
-    'auth_service',
-    'account_service',
-    'transfer_service',
-    'shared',
-]
+AUTH_USER_MODEL = 'auth_service.User'
+
